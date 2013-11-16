@@ -93,6 +93,12 @@ def submit_job(shscript_path):
     ft = Popen(cli_parts, stdin=PIPE, stderr=PIPE, stdout=PIPE).communicate()
     print 'Submitted:', cli
 
-args = get_args()
-shscript_path = generate_shscript(args)
-submit_job(shscript_path)
+def main():
+    args = get_args()
+    shscript_path = generate_shscript(args)
+    submit_job(shscript_path)
+
+if __name__ == "__main__":
+    main()
+
+
