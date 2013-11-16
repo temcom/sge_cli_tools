@@ -17,20 +17,20 @@ def get_args():
                         default = '',
                         help='Run to submit job to.')
 
-    parser.add_argument('-p','--ppn',
-                        type=int,
-                        default=16,
-                        help='Linux cmd to run.')
-
     parser.add_argument('-n','--nodes',
                         type=int,
                         default=1,
                         help='Number of nodes.')
 
+    parser.add_argument('-p','--ppn',
+                        type=int,
+                        default=16,
+                        help='Number of cores.')
+
     parser.add_argument('-w','--walltime',
                         type=str,
                         default='01:00:00',
-                        help="Allotted Time fmt='HH:MM:SS'")
+                        help="Allotted Time. Format: 'HH:MM:SS'")
 
     parser.add_argument('-a','--account',
                         type=str,
@@ -45,7 +45,7 @@ def get_args():
     parser.add_argument('cmd',
                         type=str,
                         default='normal',
-                        help='Linux cmd to run.')
+                        help='Linux command to run.')
 
     args = parser.parse_args()
     return args
