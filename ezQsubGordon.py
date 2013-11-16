@@ -46,6 +46,10 @@ def get_args():
                         default='ngcrawford@gmail.com',
                         help='Email address.')
 
+    parser.add_argument('-sh', '--submit-with-sh',
+                        action="store_true",
+                        help='Use this for testing the script.')
+
     parser.add_argument('cmd',
                         type=str,
                         default='normal',
@@ -86,10 +90,14 @@ def generate_shscript(args):
     #     print i.strip()
     return f.name
 
-def submit_job(shscript_path):
+def submit_job(shscript_path, args):
     """Submit the job."""
 
-    cli = "qsub {}".format(shscript_path)
+    if args.submit_with_sh is True:
+        cli = "sh {}".format(shscript_path)
+    else:
+        cli = "qsub {}".format(shscript_path)
+
     cli_parts = cli.split()
     ft = Popen(cli_parts, stdin=PIPE, stderr=PIPE, stdout=PIPE).communicate()
     print 'Submitted:', cli
@@ -97,7 +105,7 @@ def submit_job(shscript_path):
 def main():
     args = get_args()
     shscript_path = generate_shscript(args)
-    submit_job(shscript_path)
+    submit_job(shscript_path, args)
 
 if __name__ == "__main__":
     main()
