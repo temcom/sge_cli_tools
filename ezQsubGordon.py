@@ -1,5 +1,8 @@
 
+import os
+import sys
 import argparse
+from textwrap import dedent
 from subprocess import Popen, PIPE
 from tempfile import NamedTemporaryFile
 
@@ -55,7 +58,8 @@ def generate_shscript(args):
 
     """ Generate sh script input file"""
 
-    header = """#!/bin/bash
+    header = """\
+    #!/bin/bash
     #PBS -q {0}
     #PBS -l nodes={1}:ppn={2}:native
     #PBS -l walltime={3}
@@ -69,6 +73,9 @@ def generate_shscript(args):
 
     """.format(args.queue, args.nodes, args.ppn, args.walltime,
                args.run_name, args.account, args.email)
+    header = dedent(header)
+
+    print header + args.cmd 
 
     f = NamedTemporaryFile(delete=False)
     f.write(header + args.cmd)
