@@ -12,12 +12,12 @@ def get_args():
 
     parser.add_argument('-r', '--run-name',
                         type=str,
-                        default = '',
+                        default = 'tmp',
                         help='ID to apply to run.')
 
     parser.add_argument('-q', '--queue',
                         type=str,
-                        default = '',
+                        default = 'normal',
                         help='Run to submit job to.')
 
     parser.add_argument('-n','--nodes',
